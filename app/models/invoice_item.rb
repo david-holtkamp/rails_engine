@@ -1,3 +1,7 @@
-class InvoiceItem < ApplicationRecord
+require_relative 'modules/priceable'
 
-end 
+class InvoiceItem < ApplicationRecord
+  include Priceable
+
+  before_validation :convert_to_dollars
+end
