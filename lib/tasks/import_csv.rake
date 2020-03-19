@@ -1,6 +1,6 @@
 require 'csv'
 
-
+        
 # bundle exec rake import_csv:csv_to_db
 
 namespace :import_csv do
