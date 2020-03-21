@@ -24,8 +24,16 @@ namespace :import_csv do
 
     csv_models.each do |csv, model|
       CSV.foreach(csv, headers: true) do |row|
-        model.create!(row.to_hash)
+        if csv.include?('item')
+          object = model.new(row.to_hash)
+          object.unit_price = (object.unit_price.to_f / 100)
+          object.save
+        else
+          model.create!(row.to_hash)
+        end
       end
     end
+    ActiveRecord::Base.connection.execute('ALTER SEQUENCE merchants_id_seq RESTART WITH 101')
+    ActiveRecord::Base.connection.execute('ALTER SEQUENCE items_id_seq RESTART WITH 2484')
   end
 end
