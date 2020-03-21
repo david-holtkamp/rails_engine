@@ -162,4 +162,19 @@ RSpec.describe 'Items API' do
     json_item = JSON.parse(response.body)
     expect(json_item['data']).to be_falsey
   end
+
+  it 'can return items based on a string fragment' do
+    item_1 = create(:item, name: "string")
+    item_2 = create(:item, name: "sting")
+    item_3 = create(:item, name: "ting")
+
+    search_params = 'ing'
+
+    get "/api/v1/items/find?name=#{search_params}"
+
+    expect(response).to be_successful
+    item = JSON.parse(response.body)['data']['attributes']
+    expect(item["name"]).to eq(item_1.name)
+  end
+
 end

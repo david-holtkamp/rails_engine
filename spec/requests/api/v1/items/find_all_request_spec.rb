@@ -17,7 +17,6 @@ RSpec.describe 'Items API' do
   it 'can find all item records by name' do
     item_1 = create(:item, name: "Item")
     item_2 = create(:item, name: "Item")
-    item_3 = create(:item, name: "Other Item")
 
     get "/api/v1/items/find_all?name=#{item_1.name}"
 
@@ -51,7 +50,6 @@ RSpec.describe 'Items API' do
   it 'can find all item records by description' do
     item_1 = create(:item, description: "Item")
     item_2 = create(:item, description: "Item")
-    item_3 = create(:item, description: "Other Item")
 
     get "/api/v1/items/find_all?description=#{item_1.description}"
 
@@ -185,4 +183,19 @@ RSpec.describe 'Items API' do
     json_item = JSON.parse(response.body)
     expect(json_item['data']).to be_empty
   end
+
+
+    it 'can return items based on a string fragment' do
+      item_1 = create(:item, name: "string")
+      item_2 = create(:item, name: "sting")
+      item_3 = create(:item, name: "ting")
+
+      search_params = 'ing'
+
+      get "/api/v1/items/find_all?name=#{search_params}"
+
+      expect(response).to be_successful
+      items = JSON.parse(response.body)['data']
+      expect(items.count).to eq(3)
+    end
 end
