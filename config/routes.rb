@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       get '/merchants', to: 'merchants#index'
       get '/merchants/:id', to: 'merchants#show'
 
+      # resources :items, except: [:new, :edit]
+
       get '/items', to: 'items#index'
       get '/items/:id', to: 'items#show'
       post '/items', to: 'items#create'
