@@ -185,17 +185,17 @@ RSpec.describe 'Items API' do
   end
 
 
-    it 'can return items based on a string fragment' do
-      item_1 = create(:item, name: "string")
-      item_2 = create(:item, name: "sting")
-      item_3 = create(:item, name: "ting")
+  it 'can return items based on a string fragment' do
+    item_1 = create(:item, name: "string")
+    item_2 = create(:item, name: "sting")
+    item_3 = create(:item, name: "ting")
 
-      search_params = 'ing'
+    search_params = 'ing'
 
-      get "/api/v1/items/find_all?name=#{search_params}"
+    get "/api/v1/items/find_all?name=#{search_params}"
 
-      expect(response).to be_successful
-      items = JSON.parse(response.body)['data']
-      expect(items.count).to eq(3)
-    end
+    expect(response).to be_successful
+    items = JSON.parse(response.body)['data']
+    expect(items.count).to eq(3)
+  end
 end

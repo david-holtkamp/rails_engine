@@ -176,5 +176,4 @@ RSpec.describe 'Items API' do
     item = JSON.parse(response.body)['data']['attributes']
     expect(item["name"]).to eq(item_1.name)
   end
-
 end
