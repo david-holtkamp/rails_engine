@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get '/:id/items', to: 'items#index'
         get '/find', to: 'finders#show'
         get '/find_all', to: 'finders#index'
+        get '/most_revenue', to: 'revenue#index'
       end
 
       get '/merchants', to: 'merchants#index'
