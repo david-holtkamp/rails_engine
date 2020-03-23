@@ -5,6 +5,7 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item
   belongs_to :invoice
+  has_many :transactions, through: :invoice
 
   # before_validation :convert_to_dollars
 end
