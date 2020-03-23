@@ -26,7 +26,6 @@ describe 'Merchants with most revenue' do
     expect(response).to be_successful
 
     merchants = JSON.parse(response.body)['data']
-    require "pry"; binding.pry
 
     expect(merchants[0]['attributes']['id']).to eq(merchant_3.id)
     expect(merchants[1]['attributes']['id']).to eq(merchant_1.id)
